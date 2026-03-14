@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; object-src 'none'; form-action 'none'; frame-ancestors 'none';">
+  <title>DomasPad</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="titlebar">
+    <div id="titlebar-drag"></div>
+    <div id="tab-bar">
+      <button class="tab-scroll-btn" id="scroll-left-btn" title="Scroll left">&#9664;</button>
+      <div id="tab-scroll-area">
+        <div id="tabs"></div>
+      </div>
+      <button class="tab-scroll-btn" id="scroll-right-btn" title="Scroll right">&#9654;</button>
+    </div>
+    <button id="new-tab-btn" title="New Tab">+</button>
+    <div id="tab-bar-tail"></div>
+  </div>
+  <div id="editor-container"></div>
+  <div id="status-bar">
+    <span id="status-position">Ln 1, Col 1</span>
+    <span id="status-language">Plain Text</span>
+  </div>
+
+  <script src="bundle.js"></script>
+</body>
+</html>

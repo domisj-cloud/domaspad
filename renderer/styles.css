@@ -1,0 +1,318 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Dark theme (default) */
+:root, [data-theme="dark"] {
+  --bg: #282a36;
+  --bg-lighter: #21222c;
+  --bg-tab: #21222c;
+  --bg-tab-active: #282a36;
+  --bg-tab-hover: #2c2e3a;
+  --border: #191a21;
+  --text: #d4d4d4;
+  --text-muted: #6272a4;
+  --text-active: #f8f8f2;
+  --accent: #6272a4;
+  --gutter-bg: #282a36;
+  --gutter-text: #6272a4;
+  --gutter-border: #3b3d4a;
+}
+
+/* Light theme */
+[data-theme="light"] {
+  --bg: #ffffff;
+  --bg-lighter: #f0f0f0;
+  --bg-tab: #e8e8e8;
+  --bg-tab-active: #ffffff;
+  --bg-tab-hover: #d8d8d8;
+  --border: #c0c0c0;
+  --text: #333333;
+  --text-muted: #777777;
+  --text-active: #000000;
+  --accent: #4a90d9;
+  --gutter-bg: #f5f5f5;
+  --gutter-text: #999999;
+  --gutter-border: #dcdcdc;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===================== TAB BAR ===================== */
+#titlebar {
+  background: var(--bg-tab);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: stretch;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+#titlebar-drag {
+  -webkit-app-region: drag;
+  width: 72px;
+  min-width: 72px;
+  flex-shrink: 0;
+}
+
+#tab-bar {
+  display: flex;
+  align-items: stretch;
+  flex: 0 1 auto;
+  min-width: 0;
+  -webkit-app-region: no-drag;
+}
+
+#tab-scroll-area {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  flex: 1;
+  min-width: 0;
+  scroll-behavior: smooth;
+}
+
+#tab-scroll-area::-webkit-scrollbar {
+  height: 0;
+}
+
+#tabs {
+  display: flex;
+  align-items: stretch;
+}
+
+/* Scroll arrows */
+.tab-scroll-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  flex-shrink: 0;
+  border: none;
+  background: var(--bg-tab);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.tab-scroll-btn:hover {
+  color: var(--text);
+  background: var(--bg-tab-hover);
+}
+
+.tab-scroll-btn.visible {
+  display: flex;
+}
+
+/* Draggable tail area */
+#tab-bar-tail {
+  -webkit-app-region: drag;
+  flex: 1;
+  min-width: 20px;
+  background: var(--bg-tab);
+}
+
+/* ===================== TABS ===================== */
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px 0 10px;
+  background: var(--bg-tab);
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  user-select: none;
+  min-width: 0;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.tab:hover {
+  background: var(--bg-tab-hover);
+  color: var(--text);
+}
+
+.tab.active {
+  background: var(--bg-tab-active);
+  color: var(--text-active);
+}
+
+.tab-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+
+/* Close button — always visible, Notepad++ style */
+.tab-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: 1px solid transparent;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  flex-shrink: 0;
+  border-radius: 0;
+}
+
+.tab-close:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+/* Modified indicator (pencil icon before title) */
+.tab-modified {
+  font-size: 10px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.tab.active .tab-modified {
+  color: var(--text-active);
+}
+
+/* Tab drag and drop */
+.tab.dragging {
+  opacity: 0.4;
+}
+
+.tab.drag-over {
+  border-left: 2px solid #50fa7b;
+}
+
+/* ===================== CONTEXT MENU ===================== */
+.tab-context-menu {
+  position: fixed;
+  background: var(--bg-lighter);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 0;
+  min-width: 180px;
+  z-index: 1000;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  font-size: 12px;
+}
+
+.context-menu-item {
+  padding: 5px 20px;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.context-menu-item:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.context-menu-separator {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+/* New tab button */
+#new-tab-btn {
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 8px;
+  flex-shrink: 0;
+  -webkit-app-region: no-drag;
+}
+
+#new-tab-btn:hover {
+  color: var(--text);
+  background: var(--bg-tab-hover);
+}
+
+/* ===================== EDITOR ===================== */
+#editor-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+.cm-editor {
+  height: 100%;
+  font-size: 14px;
+}
+
+.cm-editor .cm-scroller {
+  font-family: 'Consolas', 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+  line-height: 1.55;
+}
+
+.cm-editor.cm-focused {
+  outline: none;
+}
+
+/* Line numbers — Notepad++ style */
+.cm-editor .cm-gutters {
+  background: var(--gutter-bg);
+  color: var(--gutter-text);
+  border-right: 1px solid var(--gutter-border);
+  font-size: 13px;
+  min-width: 50px;
+}
+
+.cm-editor .cm-lineNumbers .cm-gutterElement {
+  padding: 0 8px 0 12px;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Active line highlight */
+[data-theme="dark"] .cm-editor .cm-activeLine {
+  background: rgba(255, 255, 255, 0.03);
+}
+[data-theme="dark"] .cm-editor .cm-activeLineGutter {
+  background: rgba(255, 255, 255, 0.05);
+}
+[data-theme="light"] .cm-editor .cm-activeLine {
+  background: rgba(0, 0, 0, 0.04);
+}
+[data-theme="light"] .cm-editor .cm-activeLineGutter {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Override CodeMirror theme colors in light mode */
+[data-theme="light"] .cm-editor {
+  background: #ffffff;
+}
+[data-theme="light"] .cm-editor .cm-gutters {
+  background: var(--gutter-bg);
+  color: var(--gutter-text);
+  border-right: 1px solid var(--gutter-border);
+}
+
+/* ===================== STATUS BAR ===================== */
+#status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 12px;
+  background: var(--bg-lighter);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 11px;
+  min-height: 22px;
+}

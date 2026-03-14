@@ -1,0 +1,182 @@
+{
+  "name": "domaspad",
+  "version": "1.0.4",
+  "description": "Lightweight Notepad++ alternative for macOS",
+  "main": "main.js",
+  "scripts": {
+    "bundle": "esbuild renderer/app.js --bundle --outfile=renderer/bundle.js --format=iife --platform=browser",
+    "start": "npm run bundle && electron .",
+    "build": "npm run bundle && electron-builder --mac",
+    "build:universal": "npm run bundle && electron-builder --mac --universal"
+  },
+  "author": "Domas Jautakis",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.domaspad.macos",
+    "productName": "DomasPad",
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "darkModeSupport": true,
+      "fileAssociations": [
+        {
+          "ext": ["txt", "text", "log", "cfg", "ini", "conf"],
+          "name": "Text File",
+          "role": "Editor",
+          "mimeType": "text/plain"
+        },
+        {
+          "ext": ["js", "mjs", "jsx"],
+          "name": "JavaScript",
+          "role": "Editor",
+          "mimeType": "text/javascript"
+        },
+        {
+          "ext": ["ts", "tsx"],
+          "name": "TypeScript",
+          "role": "Editor",
+          "mimeType": "text/typescript"
+        },
+        {
+          "ext": ["json"],
+          "name": "JSON",
+          "role": "Editor",
+          "mimeType": "application/json"
+        },
+        {
+          "ext": ["html", "htm"],
+          "name": "HTML",
+          "role": "Editor",
+          "mimeType": "text/html"
+        },
+        {
+          "ext": ["css", "scss"],
+          "name": "CSS",
+          "role": "Editor",
+          "mimeType": "text/css"
+        },
+        {
+          "ext": ["xml", "svg", "plist"],
+          "name": "XML",
+          "role": "Editor",
+          "mimeType": "text/xml"
+        },
+        {
+          "ext": ["md", "markdown"],
+          "name": "Markdown",
+          "role": "Editor",
+          "mimeType": "text/markdown"
+        },
+        {
+          "ext": ["py"],
+          "name": "Python",
+          "role": "Editor",
+          "mimeType": "text/x-python"
+        },
+        {
+          "ext": ["java"],
+          "name": "Java",
+          "role": "Editor",
+          "mimeType": "text/x-java"
+        },
+        {
+          "ext": ["c", "h", "cpp", "hpp", "cc"],
+          "name": "C/C++",
+          "role": "Editor",
+          "mimeType": "text/x-c"
+        },
+        {
+          "ext": ["sql"],
+          "name": "SQL",
+          "role": "Editor",
+          "mimeType": "text/x-sql"
+        },
+        {
+          "ext": ["yaml", "yml"],
+          "name": "YAML",
+          "role": "Editor",
+          "mimeType": "text/yaml"
+        },
+        {
+          "ext": ["sh", "bash", "zsh"],
+          "name": "Shell Script",
+          "role": "Editor",
+          "mimeType": "text/x-shellscript"
+        },
+        {
+          "ext": ["toml"],
+          "name": "TOML",
+          "role": "Editor",
+          "mimeType": "text/x-toml"
+        },
+        {
+          "ext": ["rb"],
+          "name": "Ruby",
+          "role": "Editor",
+          "mimeType": "text/x-ruby"
+        },
+        {
+          "ext": ["go"],
+          "name": "Go",
+          "role": "Editor",
+          "mimeType": "text/x-go"
+        },
+        {
+          "ext": ["rs"],
+          "name": "Rust",
+          "role": "Editor",
+          "mimeType": "text/x-rust"
+        }
+      ]
+    },
+    "dmg": {
+      "title": "DomasPad",
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*"
+    ]
+  },
+  "dependencies": {
+    "@codemirror/lang-cpp": "^6.0.3",
+    "@codemirror/lang-css": "^6.3.1",
+    "@codemirror/lang-html": "^6.4.11",
+    "@codemirror/lang-java": "^6.0.2",
+    "@codemirror/lang-javascript": "^6.2.5",
+    "@codemirror/lang-json": "^6.0.2",
+    "@codemirror/lang-markdown": "^6.5.0",
+    "@codemirror/lang-python": "^6.2.1",
+    "@codemirror/lang-sql": "^6.10.0",
+    "@codemirror/lang-xml": "^6.1.0",
+    "@codemirror/search": "^6.6.0",
+    "@codemirror/state": "^6.6.0",
+    "@codemirror/theme-one-dark": "^6.1.3",
+    "@codemirror/view": "^6.40.0",
+    "codemirror": "^6.0.2",
+    "esbuild": "^0.27.4"
+  }
+}
