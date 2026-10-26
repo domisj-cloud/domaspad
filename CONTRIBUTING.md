@@ -6,7 +6,7 @@ Thank you for your interest in contributing!
 
 ### Prerequisites
 
-- Node.js 18+
+- A supported Node.js release: 22.23.4+, 24.22.1+, or 26.12.1+ on the corresponding major release line
 - npm
 - macOS (the app is macOS-only)
 
@@ -15,11 +15,17 @@ Thank you for your interest in contributing!
 ```bash
 git clone https://github.com/<your-fork>/domaspad.git
 cd domaspad
-npm install
+npm ci
 npm start
 ```
 
 `npm start` bundles the renderer and launches the app in development mode. DevTools are available via **View → Toggle Developer Tools** in dev builds only.
+
+`npm start` and the build commands verify the pinned Electron version and the
+Brotli CVE-2026-111497 fix marker before continuing. Run `npm run check:runtime`
+to check the runtime separately. When upgrading Electron, verify the upstream
+security fixes as well as application compatibility; a version string alone
+does not identify every backported fix.
 
 ### Project Structure
 

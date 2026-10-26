@@ -27,13 +27,13 @@ A lightweight Notepad++ alternative for macOS, built with Electron and CodeMirro
 
 ### Prerequisites
 
-- Node.js 18+
+- A supported Node.js release: 22.23.4+, 24.22.1+, or 26.12.1+ on the corresponding major release line
 - macOS
 
 ### Install & Run
 
 ```bash
-npm install
+npm ci
 npm start
 ```
 
@@ -44,6 +44,14 @@ npm run build
 ```
 
 The DMG installer will be created in the `dist/` directory.
+
+### Runtime Security
+
+DomasPad pins Electron 45.0.0, whose Chromium Brotli decoder includes the fix for
+[CVE-2026-111497](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases).
+Development and build commands run `npm run check:runtime` first to verify the
+pinned Electron version and the compiled Brotli decoder fix marker. This accounts
+for backported fixes that do not change the reported Node.js or Brotli version.
 
 ## Project Structure
 

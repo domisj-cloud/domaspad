@@ -29,12 +29,12 @@ domaspad/
 ## 3. Technology Stack & Dependencies
 
 ### Runtime
-- **Electron** ^33.x -- desktop shell
+- **Electron** 45.0.0 (pinned) -- desktop shell, with the Brotli CVE-2026-111497 fix
 - **CodeMirror 6** -- editor engine
 
 ### Dev/Build
 - **esbuild** -- bundles renderer/app.js into renderer/bundle.js (IIFE format, browser platform)
-- **electron-builder** -- packages into macOS .dmg
+- **electron-builder** 26.18.0 (pinned) -- packages into macOS .dmg
 
 ### npm dependencies (all in `dependencies`, not devDependencies)
 ```
@@ -54,9 +54,10 @@ electron, electron-builder
 
 ### npm scripts
 ```json
+"check:runtime": "ELECTRON_RUN_AS_NODE=1 electron scripts/check-runtime.js",
 "bundle": "esbuild renderer/app.js --bundle --outfile=renderer/bundle.js --format=iife --platform=browser",
-"start": "npm run bundle && electron .",
-"build": "npm run bundle && electron-builder --mac"
+"start": "npm run check:runtime && npm run bundle && electron .",
+"build": "npm run check:runtime && npm run bundle && electron-builder --mac"
 ```
 
 ---
@@ -487,7 +488,7 @@ All entries use `"role": "Editor"`.
 ## 12. Build & Run Commands
 
 ```bash
-npm install                  # install all dependencies
+npm ci                       # install locked dependencies
 npm run bundle               # esbuild: app.js -> bundle.js
 npm start                    # bundle + launch in dev mode
 npm run build                # bundle + create .dmg in dist/

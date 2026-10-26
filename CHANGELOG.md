@@ -4,6 +4,18 @@ All notable changes to DomasPad are documented here.
 
 ---
 
+## [1.0.5] - 2026-10-26 — Patched Electron runtime
+
+### Security fixes
+
+- Replaced Electron 33.4.11 with pinned Electron 45.0.0, whose Chromium Brotli decoder includes the fix for CVE-2026-111497.
+- Added a runtime check before development and packaging that verifies the pinned Electron version and the compiled decoder fix marker, including backported fixes.
+- Updated electron-builder to 26.18.0 and refreshed the dependency lockfile.
+- Updated esbuild to 0.28.2 to address its development-server advisory.
+- Required patched, supported Node.js versions for development and documented reproducible installation with `npm ci`.
+
+---
+
 ## [1.0.4] - 2026-03-14 — Security hardening
 
 ### Security fixes
